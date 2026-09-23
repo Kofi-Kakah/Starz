@@ -1,5 +1,5 @@
 import {WebSocket, WebSocketServer} from 'ws';
-//import {wsArcjet} from "../arcjet.js";
+import {wsArcjet} from "../arcjet.js";
 
 /**const matchSubscribers = new Map();
 
@@ -43,34 +43,6 @@ function broadcastToAll(wss, payload) {
     }
 }
 
-export function attachWebSocketServer(server) {
-    const wss = new WebSocketServer({ noServer: true, path: '/ws', maxPayload: 1024 * 1024 });
-
-    server.on('upgrade', (req, socket, head) => {
-        const { pathname } = new URL(req.url, `http://${req.headers.host}`);
-
-        if (pathname !== '/ws') {
-            socket.destroy();
-            return;
-        }
-
-        wss.handleUpgrade(req, socket, head, (webSocket) => {
-            wss.emit('connection', webSocket, req);
-        });
-    });
-
-    wss.on('connection', (socket) => {
-        sendJson(socket, { type: 'welcome' });
-
-        socket.on('error', console.error);
-    });
-
-    function broadcastMatchCreated(match) {
-        broadcastToAll(wss, { type: 'match_created', data: match });
-    }
-
-    return { broadcastMatchCreated }
-}
 
 /**function broadcastToMatch(matchId, payload) {
     const subscribers = matchSubscribers.get(matchId);
@@ -106,7 +78,7 @@ function handleMessage(socket, data) {
         socket.subscriptions.delete(message.matchId);
         sendJson(socket, { type: 'unsubscribed', matchId: message.matchId });
     }
-}
+}**/
 
 export function attachWebSocketServer(server) {
     const wss = new WebSocketServer({ noServer: true, path: '/ws', maxPayload: 1024 * 1024 });
@@ -186,4 +158,4 @@ export function attachWebSocketServer(server) {
     }
 
     return { broadcastMatchCreated, broadcastCommentary };
-}**/
+}
