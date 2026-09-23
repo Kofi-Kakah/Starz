@@ -22,7 +22,7 @@ export const matches = pgTable("matches", {
   awayTeam: text("away_team").notNull(),
   status: matchStatus("status").default("scheduled").notNull(),
   startTime: timestamp('start_time'),
-  endtime: timestamp('end-time'),
+  endTime: timestamp("end_time"),
   homeScore: integer("home_score").default(0).notNull(),
   awayScore: integer("away_score").default(0).notNull(),
   createdAt: timestamp("created_at", { withTimezone: true })

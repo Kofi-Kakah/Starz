@@ -148,8 +148,8 @@
           "primaryKey": false,
           "notNull": false
         },
-        "end-time": {
-          "name": "end-time",
+        "end_time": {
+          "name": "end_time",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false
