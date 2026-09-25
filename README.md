@@ -72,7 +72,6 @@ A real-time sports backend for scores, match lifecycle and ball-by-ball commenta
 - 🐘 **Drizzle migrations** — generated and versioned under `/drizzle`
 - 📡 **Heartbeats** — 30s ping/pong liveness checks that terminate dead sockets
 
-
 ---
 
 ## 🚀 Quick Start
@@ -147,7 +146,6 @@ A real-time sports backend for scores, match lifecycle and ball-by-ball commenta
 
 > 🔒 `.env` is git-ignored — never commit real keys. Use `.env.example` as the shared template.
 
-
 ---
 
 ## 📚 API Reference
@@ -206,7 +204,16 @@ Content-Type: application/json
 
 ```json
 {
-
+  "minute": 67,
+  "period": "2H",
+  "eventType": "goal",
+  "actor": "Bukayo Saka",
+  "team": "Arsenal",
+  "message": "GOAL! Saka curls one into the top corner from the edge of the box!",
+  "metadata": { "assist": "Martin Ødegaard", "xG": 0.34 },
+  "tags": ["goal", "arsenal"]
+}
+```
 
 ---
 
@@ -263,7 +270,12 @@ sportz/
 │   │   └── commentary.js
 │   ├── websocket/
 │   │   └── server.js      # /ws endpoint, subscriptions, broadcasts
-
+│   ├── arcjet.js          # HTTP + WS protection middleware
+│   └── index.js           # Express + HTTP server bootstrap
+├── drizzle.config.js
+├── .env.example
+└── package.json
+```
 
 ---
 
@@ -296,19 +308,3 @@ Built as part of the **JavaScript Mastery** real-time Websockets course. If you 
 **[JavaScript Mastery](https://www.youtube.com/@JavaScriptMastery)** — Join the JSM family! 💛
 
 </div>
-│   ├── arcjet.js          # HTTP + WS protection middleware
-│   └── index.js           # Express + HTTP server bootstrap
-├── drizzle.config.js
-├── .env.example
-└── package.json
-```
-  "minute": 67,
-  "period": "2H",
-  "eventType": "goal",
-  "actor": "Bukayo Saka",
-  "team": "Arsenal",
-  "message": "GOAL! Saka curls one into the top corner from the edge of the box!",
-  "metadata": { "assist": "Martin Ødegaard", "xG": 0.34 },
-  "tags": ["goal", "arsenal"]
-}
-```
