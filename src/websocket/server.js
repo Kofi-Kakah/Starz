@@ -1,7 +1,7 @@
 import {WebSocket, WebSocketServer} from 'ws';
 import {wsArcjet} from "../arcjet.js";
 
-/**const matchSubscribers = new Map();
+const matchSubscribers = new Map();
 
 function subscribe(matchId, socket) {
     if(!matchSubscribers.has(matchId)) {
@@ -27,7 +27,7 @@ function cleanupSubscriptions(socket) {
     for(const matchId of socket.subscriptions) {
         unsubscribe(matchId, socket);
     }
-}**/
+}
 
 function sendJson(socket, payload) {
     if(socket.readyState !== WebSocket.OPEN) return;
@@ -43,8 +43,7 @@ function broadcastToAll(wss, payload) {
     }
 }
 
-
-/**function broadcastToMatch(matchId, payload) {
+function broadcastToMatch(matchId, payload) {
     const subscribers = matchSubscribers.get(matchId);
     if(!subscribers || subscribers.size === 0) return;
 
@@ -78,7 +77,7 @@ function handleMessage(socket, data) {
         socket.subscriptions.delete(message.matchId);
         sendJson(socket, { type: 'unsubscribed', matchId: message.matchId });
     }
-}**/
+}
 
 export function attachWebSocketServer(server) {
     const wss = new WebSocketServer({ noServer: true, path: '/ws', maxPayload: 1024 * 1024 });
